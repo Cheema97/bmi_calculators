@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, non_constant_identifier_names, empty_constructor_bodies, constant_identifier_names, prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'Icon_content.dart';
@@ -9,7 +8,7 @@ const bottomconatinercolor = Color(0xFFEB1555);
 const Colorstring = Color(0xFF1D1E33);
 const inactivecardcolour = Color(0xFF111328);
 
-enum Sex {
+enum Gender {
   male,
   female,
 }
@@ -20,29 +19,29 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Sex gender;
+  Gender? selectedGender;
 
-  Color maleCardColour = inactivecardcolour;
-  Color femaleCardColour = inactivecardcolour;
+  // Color maleCardColour = inactivecardcolour;
+  // Color femaleCardColour = inactivecardcolour;
 
-  void updateColor(Sex gender) {
-    if (gender == Sex.male) {
-      if (maleCardColour == inactivecardcolour) {
-        maleCardColour = Colorstring;
-        femaleCardColour = inactivecardcolour;
-      } else {
-        maleCardColour = inactivecardcolour;
-      }
-    }
-    if (gender == Sex.female) {
-      if (femaleCardColour == inactivecardcolour) {
-        femaleCardColour = Colorstring;
-        maleCardColour = inactivecardcolour;
-      } else {
-        femaleCardColour = inactivecardcolour;
-      }
-    }
-  }
+  // void updateColor(Sex gender) {
+  //   if (gender == Sex.male) {
+  //     if (maleCardColour == inactivecardcolour) {
+  //       maleCardColour = Colorstring;
+  //       femaleCardColour = inactivecardcolour;
+  //     } else {
+  //       maleCardColour = inactivecardcolour;
+  //     }
+  //   }
+  //   if (gender == Sex.female) {
+  //     if (femaleCardColour == inactivecardcolour) {
+  //       femaleCardColour = Colorstring;
+  //       maleCardColour = inactivecardcolour;
+  //     } else {
+  //       femaleCardColour = inactivecardcolour;
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +58,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        gender = Sex.male;
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReusableCard(
-                      colour:
-                          gender == Sex.male ? Colorstring : inactivecardcolour,
+                      colour: selectedGender == Gender.male
+                          ? Colorstring
+                          : inactivecardcolour,
                       cardChild: Iconcontent(
                         icon: FontAwesomeIcons.mars,
                         label: 'MALE',
@@ -76,17 +76,18 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        gender = Sex.female;
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReusableCard(
-                        colour: gender == Sex.female
-                            ? Colorstring
-                            : inactivecardcolour,
-                        cardChild: Iconcontent(
-                          icon: FontAwesomeIcons.venus,
-                          label: 'FEMALE',
-                        )),
+                      colour: selectedGender == Gender.female
+                          ? Colorstring
+                          : inactivecardcolour,
+                      cardChild: Iconcontent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                      ),
+                    ),
                   ),
                 )
               ],
